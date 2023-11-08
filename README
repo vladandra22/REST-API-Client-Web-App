@@ -1,0 +1,44 @@
+Vlad Andra
+321CC
+
+---------- TEMA 3 PCOM ----------
+
+Aceasta tema a constat in implementarea si intelegerea modelului
+client-server prin protocolul HTTP. Ca structura, am folosit scheletul
+laboratorului 9 alaturi de rezolvarea mea a acestuia, dar si biblioteca
+externa parson pentru manipularea obiectelor din JSON. De asemenea, am
+ales limbajul C in aceasta tema, deoarece nu am avut nevoie de structuri
+de date auxiliare, comparativ cu celelalte teme.
+
+In request, am schimbat structura functiilor pentru a contine strict
+datele necesare acestei teme. De asemenea, in GET, mi-am adaugat o 
+verificare in plus pentru a implementa in cadrul aceluiasi cod si metoda
+DELETE, aceasta fiind folosita in cazul in care doresc sa sterg o carte
+din biblioteca.
+
+In client, tratez cazurile in functiile de comenzile primite ca si input
+intr-un while ce ruleaza infinit pana la primirea comenzii de exit.
+Motivul pentru care deschid conexiunea de fiecare data este pentru a nu
+avea probleme cu timeout-ul, eroare cu care m-am confruntat. Colectez
+datele utilizatorului si, in functie de caz, tratez POST, GET sau DELETE
+request-urile. La inceput, inregistrez user-ul si dupa, la logare, marcam 
+user-ul ca fiind online si imi extrag cookie-ul din raspuns. Acesta ma va
+ajuta la GET request-ul din enter_library, unde in urma sa voi obtine
+un token. 
+
+Daca suntem in biblioteca, afisam cartile in functiile de comenzile 
+get_books / get_book. Adaugarea in biblioteca se face cu ajutorul lui
+add_book, unde a fost necesara o implementare atenta, astfel incat
+informatiile primite sa respecte formatul si sa putem avea simultan
+posibilitatea unui titlu/autor/publisher/genre format din cuvinte
+multiple. La stergerea unei carti, folosesc abordarea oferita de
+GET, marcand indicele meu de delete cu valoarea 'true'. Ma asigur ca
+dupa resetez acest indice, pentru a putea functiona corespunzator 
+pentru celelalte intrari. La logout, resetez variabilele la 0 si trimit
+request-ul catre server pentru ca acesta sa stie ca totul este in regula.
+La exit avem un simplu break, care iese din bucla, inchide socket-ul si
+returneaza 0.
+
+
+
+
